@@ -16,8 +16,9 @@ expeditor:
         # be "dev". They are extracted here as environment variables
         # (thus making them overridable) in order to facilitate ad-hoc
         # testing of artifacts from arbitrary channels (e.g., as part
-        # of validating a core plans refresh). Both values should
-        # always be the same.
+        # of validating a core plans refresh).
+        #
+        # If you're overriding these, make sure they're the same.
         HAB_BLDR_CHANNEL: "dev"
         HAB_INTERNAL_BLDR_CHANNEL: "dev"
 
@@ -75,7 +76,7 @@ steps:
 
   - label: "[:windows: hab-svc-load]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_supervisor_load_service
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_supervisor_load_service
     expeditor:
       executor:
         docker:
@@ -89,7 +90,7 @@ steps:
 
   - label: "[:windows: Start-Service]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_supervisor_windows_service
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_supervisor_windows_service
     expeditor:
       executor:
         docker:
@@ -103,7 +104,7 @@ steps:
 
   - label: "[:windows: cleanly-shutdown-supervisor]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_supervisor_windows_shutdown
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_supervisor_windows_shutdown
     expeditor:
       executor:
         docker:
@@ -117,7 +118,7 @@ steps:
 
   - label: "[:windows: hab-svc-load-with-svc-user]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_supervisor_load_service_with_password
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_supervisor_load_service_with_password
     expeditor:
       executor:
         docker:
@@ -131,7 +132,7 @@ steps:
 
   - label: "[:windows: test_supervisor_binds]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_supervisor_binds
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_supervisor_binds
     expeditor:
       executor:
         docker:
@@ -157,7 +158,7 @@ steps:
 
   - label: "[:windows: test_supervisor_term]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_supervisor_term
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_supervisor_term
     expeditor:
       executor:
         docker:
@@ -180,7 +181,7 @@ steps:
 
   - label: "[:windows: hab-svc-load-with-hab-user]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_supervisor_load_with_hab_user
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_supervisor_load_with_hab_user
     expeditor:
       executor:
         docker:
@@ -265,7 +266,7 @@ steps:
 
   - label: "[:windows: test_tar_export]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_tar_export
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_tar_export
     expeditor:
       executor:
         docker:
@@ -303,7 +304,7 @@ steps:
 
   - label: "[:windows: test_studio_with_ssl_cert_file_envvar_set]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_studio_with_ssl_cert_file_envvar_set
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_studio_with_ssl_cert_file_envvar_set
     expeditor:
       executor:
         docker:
@@ -330,7 +331,7 @@ steps:
 
   - label: "[:windows: test_studio_version]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_studio_version
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_studio_version
     expeditor:
       executor:
         docker:
@@ -345,7 +346,7 @@ steps:
 
   - label: "[:windows: 2019 :docker: test_studio_version]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_studio_version
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_studio_version
     env:
       BUILD_PKG_TARGET: x86_64-windows
       DOCKER_STUDIO_TEST: true
@@ -358,7 +359,7 @@ steps:
 
   - label: "[:windows: 2016 :docker: test_studio_version]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_studio_version
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_studio_version
     env:
       BUILD_PKG_TARGET: x86_64-windows
       DOCKER_STUDIO_TEST: true
@@ -398,7 +399,7 @@ steps:
 
   - label: "[:windows: test_studio_supervisor]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_studio_supervisor
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_studio_supervisor
     expeditor:
       executor:
         docker:
@@ -413,7 +414,7 @@ steps:
 
   - label: "[:windows: :docker: test_studio_supervisor]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_studio_supervisor
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_studio_supervisor
     env:
       BUILD_PKG_TARGET: x86_64-windows
       DOCKER_STUDIO_TEST: true
@@ -426,7 +427,7 @@ steps:
 
   - label: "[:windows: test_studio_profile]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_studio_profile
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_studio_profile
     expeditor:
       executor:
         docker:
@@ -441,7 +442,7 @@ steps:
 
   - label: "[:windows: :docker: test_studio_profile]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_studio_profile
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_studio_profile
     env:
       BUILD_PKG_TARGET: x86_64-windows
       DOCKER_STUDIO_TEST: true
@@ -477,7 +478,7 @@ steps:
 
   - label: "[:windows: test_studio_can_build_packages]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_studio_can_build_packages
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_studio_can_build_packages
     expeditor:
       executor:
         docker:
@@ -492,7 +493,7 @@ steps:
 
   - label: "[:windows: test_studio_can_build_packages_with_pkg_version_function]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_studio_can_build_packages_with_pkg_version_function
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_studio_can_build_packages_with_pkg_version_function
     expeditor:
       executor:
         docker:
@@ -507,7 +508,7 @@ steps:
 
   - label: "[:windows: test_studio_can_build_scaffolded_package]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_studio_can_build_scaffolded_package
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_studio_can_build_scaffolded_package
     expeditor:
       executor:
         docker:
@@ -543,7 +544,7 @@ steps:
 
   - label: "[:windows: test_windows_service_stops_on_launcher_termination]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_windows_service_stops_on_launcher_termination
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_windows_service_stops_on_launcher_termination
     expeditor:
       executor:
         docker:
@@ -557,7 +558,7 @@ steps:
 
   - label: "[:windows: test_ssl_certificate_loading]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_ssl_certificate_loading
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_ssl_certificate_loading
     expeditor:
       executor:
         docker:
@@ -572,7 +573,7 @@ steps:
 
   - label: "[:windows: test_pkg_install]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_pkg_install
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_pkg_install
     expeditor:
       executor:
         docker:
@@ -629,7 +630,7 @@ steps:
 
   - label: "[:windows: test_simple_hooks]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_simple_hooks
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_simple_hooks
     expeditor:
       executor:
         docker:
@@ -715,7 +716,7 @@ steps:
 
   - label: "[:windows: test_pkg_uninstall_hook]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_pkg_uninstall_hook
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_pkg_uninstall_hook
     expeditor:
       executor:
         docker:
@@ -730,7 +731,7 @@ steps:
 
   - label: "[:linux: test_container_exporter]"
     command:
-      - bash .expeditor/scripts/end_to_end/run_e2e_test.sh \$HAB_BLDR_CHANNEL test_container_exporter
+      - bash .expeditor/scripts/end_to_end/run_e2e_test.sh $HAB_BLDR_CHANNEL test_container_exporter
     env:
       BUILD_PKG_TARGET: x86_64-linux
     expeditor:
@@ -741,7 +742,7 @@ steps:
 
   - label: "[:windows: test_container_exporter]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_container_exporter
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_container_exporter
     env:
       BUILD_PKG_TARGET: x86_64-windows
     expeditor:
@@ -765,7 +766,7 @@ steps:
 
   - label: "[:windows: test_svc_update]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_svc_update
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_svc_update
     env:
       BUILD_PKG_TARGET: x86_64-windows
     expeditor:
@@ -782,7 +783,7 @@ steps:
 
   - label: "[:linux: test_config_files]"
     command:
-      - bash .expeditor/scripts/end_to_end/run_e2e_test.sh \$HAB_BLDR_CHANNEL test_config_files
+      - bash .expeditor/scripts/end_to_end/run_e2e_test.sh $HAB_BLDR_CHANNEL test_config_files
     env:
       BUILD_PKG_TARGET: x86_64-linux
     expeditor:
@@ -795,7 +796,7 @@ steps:
 
   - label: "[:windows: test_config_files]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_config_files
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_config_files
     env:
       BUILD_PKG_TARGET: x86_64-windows
     expeditor:
@@ -825,7 +826,7 @@ steps:
 
   - label: "[:windows: test_alternate_error_exit_codes]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_alternate_error_exit_codes
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_alternate_error_exit_codes
     env:
       BUILD_PKG_TARGET: x86_64-windows
     expeditor:
@@ -879,7 +880,7 @@ steps:
 
   - label: "[:windows: test_external_binaries]"
     command:
-      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 \$HAB_BLDR_CHANNEL test_external_binaries
+      - powershell .expeditor/scripts/end_to_end/run_e2e_test.ps1 test_external_binaries
     env:
       BUILD_PKG_TARGET: x86_64-windows
     expeditor:
